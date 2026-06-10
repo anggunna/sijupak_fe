@@ -137,7 +137,7 @@ export default function DashboardLayout({ children }: Props) {
             <ParkingSquare className="w-4 h-4 text-white" />
           </div>
           <div>
-            <p className="font-bold text-gray-900 text-sm leading-none">SIJUPAK</p>
+            <p className="font-bold text-gray-900 text-sm leading-none">SIGAP</p>
             <p className="text-gray-400 text-xs mt-0.5">Dinas Perhubungan</p>
           </div>
         </div>

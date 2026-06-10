@@ -178,7 +178,7 @@ export default function ScanSection() {
                 {mode === 'camera' ? 'Kamera Aktif' : 'Kamera Tidak Aktif'}
               </span>
             </div>
-            <span className="text-blue-300 text-xs">SIJUPAK v1.0</span>
+            <span className="text-blue-300 text-xs">SIGAP v1.0</span>
           </div>
 
           <div className="p-5 sm:p-8">
@@ -199,7 +199,7 @@ export default function ScanSection() {
                 </div>
                 <p className="text-gray-500 text-sm">Pilih metode identifikasi</p>
                 <div className="flex gap-3 w-full max-w-xs">
-                  <button onClick={startCamera}
+                  <button onClick={() => startCamera()}
                     className="flex-1 flex items-center justify-center gap-2 bg-blue-700 text-white font-semibold px-4 py-3 rounded-xl hover:bg-blue-800 transition-colors text-sm">
                     <Camera className="w-4 h-4" />Kamera
                   </button>

@@ -18,10 +18,12 @@ export default function HeroSection() {
               <span>Sistem Resmi Dinas Perhubungan</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
-              Sistem Identifikasi{' '}
-              <span className="text-yellow-400">Juru Parkir</span>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-2 tracking-tight">
+              SIGAP
             </h1>
+            <p className="text-yellow-400 font-bold text-lg sm:text-xl md:text-2xl mb-6 leading-snug">
+              Sistem Identifikasi Legalitas Juru Parkir Alun-Alun Purwokerto
+            </p>
 
             <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-lg">
               Platform digital untuk pendataan, verifikasi, dan pengelolaan identitas juru parkir
@@ -60,7 +62,7 @@ export default function HeroSection() {
                     <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">SIJUPAK</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wide">SIGAP</p>
                     <p className="font-bold text-gray-800">Kartu Identitas Juru Parkir</p>
                   </div>
                 </div>

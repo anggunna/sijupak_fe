@@ -33,9 +33,9 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white font-bold text-2xl">
             <ParkingSquare className="w-8 h-8" />
-            SIJUPAK
+            SIGAP
           </Link>
-          <p className="text-blue-200 text-sm mt-1">Sistem Identifikasi Juru Parkir</p>
+          <p className="text-blue-200 text-sm mt-1">Sistem Identifikasi Legalitas Juru Parkir Alun-Alun Purwokerto</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-2xl p-8">

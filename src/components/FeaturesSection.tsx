@@ -54,7 +54,7 @@ export default function FeaturesSection() {
           <p className="text-blue-700 font-semibold text-xs sm:text-sm uppercase tracking-widest mb-2">Fitur Unggulan</p>
           <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Semua yang Anda Butuhkan</h2>
           <p className="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
-            SIJUPAK hadir dengan fitur lengkap untuk memudahkan pengelolaan juru parkir dari
+            SIGAP hadir dengan fitur lengkap untuk memudahkan pengelolaan juru parkir dari
             pendaftaran hingga monitoring harian.
           </p>
         </div>

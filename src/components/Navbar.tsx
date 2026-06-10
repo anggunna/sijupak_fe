@@ -18,7 +18,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-14 sm:h-16">
           <a href="#beranda" className="flex items-center gap-2 text-blue-700 font-bold text-lg sm:text-xl">
             <ParkingSquare className="w-6 h-6 sm:w-7 sm:h-7" />
-            <span>SIJUPAK</span>
+            <span>SIGAP</span>
           </a>
 
           {/* Desktop Links */}

@@ -7,10 +7,10 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-white font-bold text-lg">
             <ParkingSquare className="w-6 h-6 text-blue-400" />
-            <span>SIJUPAK</span>
+            <span>SIGAP</span>
           </div>
           <p className="text-sm text-center">
-            Sistem Identifikasi Juru Parkir — Dinas Perhubungan
+            Sistem Identifikasi Legalitas Juru Parkir Alun-Alun Purwokerto — Dinas Perhubungan
           </p>
           <p className="text-sm">© {new Date().getFullYear()} Hak Cipta Dilindungi</p>
         </div>
