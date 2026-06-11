@@ -5,12 +5,14 @@ import {
 } from 'lucide-react'
 import api from '@/lib/axios'
 
-const DEMO_RESULTS = [
-  { nama: 'Budi Santoso', status: 'TERDAFTAR RESMI', valid: true, nomorId: 'JP-2024-0042' },
-  { nama: 'Tidak Dikenali', status: 'TIDAK TERDAFTAR', valid: false, nomorId: '-' },
-]
-
-type ScanResult = (typeof DEMO_RESULTS)[number] | null
+type ScanResult = {
+  nama: string
+  status: string
+  valid: boolean
+  nomorId: string
+  area?: string | null
+  confidence?: number
+} | null
 type Mode = 'idle' | 'camera' | 'preview'
 
 export default function ScanSection() {
@@ -35,31 +37,46 @@ export default function ScanSection() {
   const [submitted, setSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
-  const recordScan = (valid: boolean) => {
-    api.post('/aktivitas-scan/', {
-      hasil: valid ? 'terdaftar' : 'tidak_terdaftar',
-      confidence: valid ? 0.85 + Math.random() * 0.14 : 0.3 + Math.random() * 0.3,
-      juru_parkir_id: null,
-    }).catch(() => {/* silent */})
-  }
-
-  const simulateScan = (src: string) => {
+  const scanWajah = async (imageBlob: Blob, previewUrl: string) => {
     setScanning(true)
     setResult(null)
     setShowForm(false)
     setSubmitted(false)
-    setPreviewSrc(src)
+    setPreviewSrc(previewUrl)
     setMode('preview')
-    setTimeout(() => {
-      const r = DEMO_RESULTS[Math.random() > 0.4 ? 0 : 1]
+
+    try {
+      const formData = new FormData()
+      formData.append('file', imageBlob, 'scan.jpg')
+
+      const response = await api.post('/aktivitas-scan/scan-wajah', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+
+      const data = response.data
+      const r: NonNullable<ScanResult> = {
+        nama: data.nama,
+        status: data.status_label,
+        valid: data.hasil === 'terdaftar',
+        nomorId: data.nomor_id,
+        area: data.area,
+        confidence: data.confidence,
+      }
       setResult(r)
-      setScanning(false)
       if (!r.valid) setShowForm(true)
-      recordScan(r.valid)
-    }, 2200)
+    } catch (err: unknown) {
+      const msg = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail
+      setResult({
+        nama: 'Gagal Memproses',
+        status: msg || 'Terjadi kesalahan saat menghubungi server. Coba lagi.',
+        valid: false,
+        nomorId: '-',
+      })
+    } finally {
+      setScanning(false)
+    }
   }
 
-  const [shouldMirror, setShouldMirror] = useState(false)
 
   const startCamera = async (facing: 'environment' | 'user' = facingMode) => {
     setCameraError(null)
@@ -79,8 +96,6 @@ export default function ScanSection() {
       const settings = track.getSettings()
       const actualFacing = (settings.facingMode as string) || ''
       setFacingMode(actualFacing === 'environment' ? 'environment' : 'user')
-      // Mirror jika kamera depan atau tidak diketahui (laptop webcam)
-      setShouldMirror(actualFacing !== 'environment')
 
       setMode('camera')
       setTimeout(() => {
@@ -102,7 +117,11 @@ export default function ScanSection() {
     canvas.height = video.videoHeight
     canvas.getContext('2d')?.drawImage(video, 0, 0)
     stopCamera()
-    simulateScan(canvas.toDataURL('image/jpeg'))
+    const previewUrl = canvas.toDataURL('image/jpeg')
+    // Convert canvas to Blob for multipart upload
+    canvas.toBlob((blob) => {
+      if (blob) scanWajah(blob, previewUrl)
+    }, 'image/jpeg', 0.9)
   }
 
   const stopCamera = () => {
@@ -113,9 +132,9 @@ export default function ScanSection() {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const reader = new FileReader()
-    reader.onload = (ev) => simulateScan(ev.target?.result as string)
-    reader.readAsDataURL(file)
+    // Generate preview URL for display
+    const previewUrl = URL.createObjectURL(file)
+    scanWajah(file, previewUrl)
     e.target.value = ''
   }
 
@@ -221,8 +240,7 @@ export default function ScanSection() {
                   <span className="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-green-400 rounded-bl z-10" />
                   <span className="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-green-400 rounded-br z-10" />
                   <video ref={videoRef} autoPlay playsInline muted
-                    className="w-full aspect-video object-cover"
-                    style={{ transform: shouldMirror ? 'scaleX(-1)' : 'none' }} />
+                    className="w-full aspect-video object-cover" />
                 </div>
                 <canvas ref={canvasRef} className="hidden" />
                 <p className="text-gray-500 text-sm text-center">Arahkan kamera ke wajah juru parkir</p>
@@ -270,10 +288,14 @@ export default function ScanSection() {
                     </div>
                     <p className="font-bold text-gray-900">{result.nama}</p>
                     {result.nomorId !== '-' && <p className="text-xs text-gray-400">ID: {result.nomorId}</p>}
+                    {result.area && <p className="text-xs text-gray-400">Area: {result.area}</p>}
+                    {result.confidence !== undefined && (
+                      <p className="text-xs text-gray-400">Akurasi: {result.confidence.toFixed(1)}%</p>
+                    )}
                     <span className={`inline-block mt-2 text-xs font-bold px-3 py-1 rounded-full ${result.valid ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}>
                       {result.status}
                     </span>
-                    {!result.valid && (
+                    {!result.valid && result.nama !== 'Gagal Memproses' && (
                       <p className="text-xs text-red-600 mt-2 font-medium">Isi form di bawah untuk melaporkan ke Dishub</p>
                     )}
                   </div>
@@ -339,7 +361,7 @@ export default function ScanSection() {
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-4">
-          * Mode demo — hasil identifikasi bersifat simulasi. Integrasi AI akan menggantikan data ini.
+          * Hasil identifikasi menggunakan model AI ResNet50 yang dilatih khusus untuk sistem SIGAP.
         </p>
       </div>
     </section>
