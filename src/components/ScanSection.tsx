@@ -361,7 +361,7 @@ export default function ScanSection() {
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-4">
-          * Hasil identifikasi menggunakan model AI ResNet50 yang dilatih khusus untuk sistem SIGAP.
+          * Hasil identifikasi menggunakan model AI MobileNetV2 yang dilatih khusus untuk sistem SIGAP.
         </p>
       </div>
     </section>
