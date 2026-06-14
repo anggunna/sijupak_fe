@@ -1,3 +1,9 @@
+/**
+ * ScanSection Component
+ * 
+ * Digunakan untuk melakukan pemindaian wajah juru parkir di Kawasan Alun-Alun Purwokerto
+ * untuk verifikasi status legalitas juru parkir (SIJAKA PWT).
+ */
 import { useRef, useState } from 'react'
 import {
   Camera, Upload, X, CheckCircle2, AlertCircle,
