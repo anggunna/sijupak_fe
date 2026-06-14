@@ -48,14 +48,14 @@ export default function RegisterPage() {
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2 text-white font-bold text-2xl">
             <ParkingSquare className="w-8 h-8" />
-            SIGAP
+            SIJAKA PWT
           </Link>
-          <p className="text-blue-200 text-sm mt-1">Sistem Identifikasi Legalitas Juru Parkir Alun-Alun Purwokerto</p>
+          <p className="text-blue-200 text-sm mt-1">Sistem Identifikasi Juru Parkir Kawasan Alun-Alun Purwokerto</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Buat Akun Baru</h1>
-          <p className="text-gray-500 text-sm mb-6">Daftarkan diri Anda sebagai pengguna SIGAP</p>
+          <p className="text-gray-500 text-sm mb-6">Daftarkan diri Anda sebagai pengguna SIJAKA PWT</p>
 
           {error && (
             <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm mb-5">

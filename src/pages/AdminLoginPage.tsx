@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
             <ShieldCheck className="w-7 h-7 text-white" />
           </div>
           <h1 className="text-white font-bold text-xl">Portal Admin</h1>
-          <p className="text-blue-200 text-sm mt-1">Dinas Perhubungan — SIGAP</p>
+          <p className="text-blue-200 text-sm mt-1">Dinas Perhubungan — SIJAKA PWT</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-2xl p-6">

@@ -197,7 +197,7 @@ export default function ScanSection() {
                 {mode === 'camera' ? 'Kamera Aktif' : 'Kamera Tidak Aktif'}
               </span>
             </div>
-            <span className="text-blue-300 text-xs">SIGAP v1.0</span>
+            <span className="text-blue-300 text-xs">SIJAKA PWT v1.0</span>
           </div>
 
           <div className="p-5 sm:p-8">
@@ -361,7 +361,7 @@ export default function ScanSection() {
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-4">
-          * Hasil identifikasi menggunakan model AI MobileNetV2 yang dilatih khusus untuk sistem SIGAP.
+          * Hasil identifikasi menggunakan model AI MobileNetV2 yang dilatih khusus untuk sistem SIJAKA PWT.
         </p>
       </div>
     </section>

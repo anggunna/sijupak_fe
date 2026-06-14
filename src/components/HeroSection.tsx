@@ -19,10 +19,10 @@ export default function HeroSection() {
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-2 tracking-tight">
-              SIGAP
+              SIJAKA PWT
             </h1>
             <p className="text-yellow-400 font-bold text-lg sm:text-xl md:text-2xl mb-6 leading-snug">
-              Sistem Identifikasi Legalitas Juru Parkir Alun-Alun Purwokerto
+              Sistem Identifikasi Juru Parkir Kawasan Alun-Alun Purwokerto
             </p>
 
             <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-lg">
@@ -62,7 +62,7 @@ export default function HeroSection() {
                     <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">SIGAP</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-wide">SIJAKA PWT</p>
                     <p className="font-bold text-gray-800">Kartu Identitas Juru Parkir</p>
                   </div>
                 </div>
